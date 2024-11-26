@@ -11,5 +11,8 @@ A package for adding a fully configurable cookie consent banner to your Umbraco 
 2. Customize the banner's appearance and behavior.
 3. Save and publish to activate the banner on your site.
 
+## Credits
+This package is a simple integration of the [CookieConsent library](https://github.com/orestbida/cookieconsent), created by Orest Bida.
+
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
