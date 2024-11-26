@@ -1,4 +1,7 @@
-﻿using Umbraco.Cms.Core.Composing;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Our.Umbraco.CookieConsent.Interfaces;
+using Our.Umbraco.CookieConsent.Services;
+using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 
 namespace Our.Umbraco.CookieConsent
@@ -7,6 +10,8 @@ namespace Our.Umbraco.CookieConsent
     {
         public void Compose(IUmbracoBuilder builder)
         {
+            builder.Services.AddScoped<ICookieConsentService, CookieConsentService>();
+            builder.AddDashboard<CookieConsentDashboard>();
         }
     }
 }

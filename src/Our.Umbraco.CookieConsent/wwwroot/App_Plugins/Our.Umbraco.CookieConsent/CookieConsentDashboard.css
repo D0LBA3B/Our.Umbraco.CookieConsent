@@ -1,0 +1,89 @@
+﻿.cookieconsent-panel-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.cookieconsent-panel-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.cookieconsent-checkbox-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .cookieconsent-checkbox-list label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        color: #555;
+    }
+
+        .cookieconsent-checkbox-list label input {
+            margin-right: 5px;
+        }
+
+.cookieconsent-panel-checks label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+    .cookieconsent-panel-checks label select,
+    .cookieconsent-panel-checks label input[type="checkbox"] {
+        margin-left: 10px;
+    }
+
+.cookieconsent-panel-checks select {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+}
+
+.cookieconsent-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.cookieconsent-umb-button--danger {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .cookieconsent-umb-button--danger:hover {
+        background-color: #c0392b;
+    }
+
+.cookieconsent-umb-button--success {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .cookieconsent-umb-button--success:hover {
+        background-color: #218c54;
+    }

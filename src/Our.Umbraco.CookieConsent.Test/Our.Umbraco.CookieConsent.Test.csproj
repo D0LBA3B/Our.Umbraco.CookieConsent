@@ -2,15 +2,12 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="Umbraco.Cms" Version="13.0.0" />
     </ItemGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\Our.Umbraco.CookieConsent\Our.Umbraco.CookieConsent.csproj" />
     </ItemGroup>
-
     <ItemGroup>
         <Compile Remove="umbraco\Data\**" />
         <Compile Remove="umbraco\logs\**" />
@@ -41,8 +38,8 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="wwwroot\media\" />
+      <Folder Include="wwwroot\media\" />
     </ItemGroup>
-
     <!-- Set this to true if ModelsBuilder mode is not InMemoryAuto-->
     <PropertyGroup>
         <RazorCompileOnBuild>false</RazorCompileOnBuild>

@@ -1,0 +1,172 @@
+<div ng-controller="CookieConsentDashboard.Controller as vm">
+    <div ng-show="vm.loading">
+        <umb-load-indicator></umb-load-indicator>
+    </div>
+
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Cookie Categories</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <div class="cookieconsent-checkbox-list">
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.categories.necessary" />
+                    Necessary
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.categories.functionality" />
+                    Functionality
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.categories.analytics" />
+                    Analytics
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.categories.marketing" />
+                    Marketing
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Translations</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <div class="cookieconsent-checkbox-list">
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.ar" />
+                    Arabic
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.de" />
+                    German
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.en" />
+                    English
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.es" />
+                    Spanish
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.fr" />
+                    French
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.translations.it" />
+                    Italian
+                </label>
+            </div>
+            <label>
+                Default Language:
+                <select ng-model="vm.settings.defaultLanguage">
+                    <option value="ar">Arabic</option>
+                    <option value="de">German</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="it">Italian</option>
+                </select>
+            </label>
+        </div>
+    </div>
+
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">GUI Options</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <div>
+                <strong>Consent Modal</strong>
+                <label>
+                    Layout:
+                    <select ng-model="vm.settings.gui.modalLayout">
+                        <option value="box">Box</option>
+                        <option value="bar">Bar</option>
+                    </select>
+                </label>
+                <label>
+                    Position:
+                    <select ng-model="vm.settings.gui.modalPosition">
+                        <option value="bottom left">Bottom Left</option>
+                        <option value="bottom right">Bottom Right</option>
+                        <option value="top left">Top Left</option>
+                        <option value="top right">Top Right</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.gui.flipButtons" />
+                    Flip Buttons
+                </label>
+            </div>
+
+            <div>
+                <strong>Preferences Modal</strong>
+                <label>
+                    Layout:
+                    <select ng-model="vm.settings.gui.preferencesLayout">
+                        <option value="box">Box</option>
+                        <option value="bar">Bar</option>
+                    </select>
+                </label>
+                <label>
+                    Position:
+                    <select ng-model="vm.settings.gui.preferencesPosition">
+                        <option value="right">Right</option>
+                        <option value="left">Left</option>
+                    </select>
+                </label>
+                <label>
+                    <input type="checkbox" ng-model="vm.settings.gui.flipButtonsPreferences" />
+                    Flip Buttons
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Miscellaneous Options</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <label>
+                <input type="checkbox" ng-model="vm.settings.misc.enableDarkMode" />
+                Enable Dark Mode
+            </label>
+            <label>
+                <input type="checkbox" ng-model="vm.settings.misc.disableTransitions" />
+                Disable Transitions
+            </label>
+            <label>
+                <input type="checkbox" ng-model="vm.settings.misc.disablePageInteraction" />
+                Disable Page Interaction
+            </label>
+        </div>
+    </div>
+
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Themes</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <label>
+                Theme:
+                <select ng-model="vm.settings.theme">
+                    <option value="light">Light Theme</option>
+                    <option value="dark">Dark Theme</option>
+                    <option value="dark-turquoise">Dark Turquoise</option>
+                    <option value="light-funky">Light Funky</option>
+                    <option value="elegant-black">Elegant Black</option>
+                </select>
+            </label>
+        </div>
+    </div>
+
+    <div class="cookieconsent-actions">
+        <button class="cookieconsent-button--danger" ng-click="vm.resetConfig()">Reset to Defaults</button>
+        <button class="cookieconsent-button--success" ng-click="vm.saveSettings()">Save Configuration</button>
+    </div>
+</div>
