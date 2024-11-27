@@ -11,6 +11,7 @@ namespace Our.Umbraco.CookieConsent
         public void Compose(IUmbracoBuilder builder)
         {
             builder.Services.AddScoped<ICookieConsentService, CookieConsentService>();
+            builder.AddComponent<CookieConsentComponent>();
             builder.AddDashboard<CookieConsentDashboard>();
         }
     }
