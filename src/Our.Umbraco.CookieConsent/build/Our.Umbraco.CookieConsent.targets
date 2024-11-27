@@ -1,0 +1,15 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ViewsFilePath>$(MSBuildThisFileDirectory)..\Views\**\*.*</ViewsFilePath>
+  </PropertyGroup>
+  <Target Name="CopyViews" BeforeTargets="Build">
+    <ItemGroup>
+      <ViewsFiles Include="$(ViewsFilePath)" />
+    </ItemGroup>
+    <Message Text="Copying Clean Views files: $(ViewsFilesPath) - #@(ViewsFiles->Count()) files"  Importance="high" />
+    <Copy
+      SourceFiles="@(ViewsFiles)"
+      DestinationFiles="@(ViewsFiles->'$(MSBuildProjectDirectory)\Views\%(RecursiveDir)%(Filename)%(Extension)')"
+      SkipUnchangedFiles="true" />
+  </Target>
+</Project>

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Our.Umbraco.CookieConsent.Interfaces;
 using Our.Umbraco.CookieConsent.Services;
 using Umbraco.Cms.Core.Composing;

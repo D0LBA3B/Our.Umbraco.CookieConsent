@@ -1,0 +1,62 @@
+@using Our.Umbraco.CookieConsent.Interfaces
+@using Our.Umbraco.CookieConsent.Models
+@inject ICookieConsentService CookieConsentService
+@{
+    CookieConsentSettingsModel cookieSettings = CookieConsentService.GetSettings();
+
+}
+@if (cookieSettings is not null)
+{
+    <link rel="stylesheet" href="/libraries/cookieconsent-orestbida/cookieconsent.min.css"/>
+    <script src="/libraries/cookieconsent-orestbida/cookieconsent.umd.min.js" defer></script>
+    <script>
+    window.addEventListener('load', () => {
+        CookieConsent.run({
+            current_lang: '@cookieSettings.',
+            autoclear_cookies: true,
+            cookie_name: 'cookieconsent',
+            cookie_expiration: 31,
+            auto_language: '@cookieSettings?.LanguageOptions?.DefaultLanguage',
+            guiOptions: {
+                consentModal: {
+                    layout: "@cookieSettings?.GuiOptions.ConsentModalLayout",
+                    position: "@cookieSettings?.GuiOptions.ConsentModalPosition",
+                    equalWeightButtons: true,
+                    flipButtons: false,
+                    transition: 'slide'
+                },
+                preferencesModal: {
+                    layout: "@cookieSettings?.GuiOptions.PreferencesModalLayout",
+                    position: "@cookieSettings?.GuiOptions.PreferencesModalPosition",
+                    equalWeightButtons: true,
+                    flipButtons: false
+                }
+            },
+            language: {
+                default: "@cookieSettings?.LanguageOptions?.DefaultLanguage",
+                translations: {
+                    "en": {
+                        consentModal: {
+                            title: "TODO",
+                            description: "TODO",
+                            acceptAllBtn: "TODO",
+                            acceptNecessaryBtn: "TODO",
+                            showPreferencesBtn: "TODO",
+                            footer: "TODO"
+                        },
+                        preferencesModal: {
+                            title: "TOOD",
+                            acceptAllBtn: "TODO",
+                            acceptNecessaryBtn: "TODO",
+                            savePreferencesBtn: "TODO",
+                            closeIconLabel: "TODO",
+                            serviceCounterLabel: "Service|Services",
+                            sections: []
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+}

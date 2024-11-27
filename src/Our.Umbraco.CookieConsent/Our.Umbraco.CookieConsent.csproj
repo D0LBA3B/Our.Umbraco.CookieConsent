@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
     <ContentTargetFolders>.</ContentTargetFolders>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>Our.Umbraco.CookieConsent</PackageId>
@@ -36,5 +37,14 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="build\**\*.*">
+      <Pack>True</Pack>
+      <PackagePath>buildTransitive</PackagePath>
+    </None>
+    <None Remove="Views\Components\Cookie\default.cshtml" />
+    <Content Include="Views\**\*.*">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

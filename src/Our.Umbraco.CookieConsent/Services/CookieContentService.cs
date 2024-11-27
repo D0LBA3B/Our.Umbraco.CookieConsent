@@ -93,7 +93,7 @@ namespace Our.Umbraco.CookieConsent.Services
         {
             return new CookieConsentSettingsModel
             {
-                Categories = new CookieCategoriesModel
+                ApplicableCategories = new CookieCategoriesModel
                 {
                     Necessary = true,
                     Functionality = false,
@@ -106,13 +106,18 @@ namespace Our.Umbraco.CookieConsent.Services
                     { "fr", false },
                     { "de", false }
                 },
-                DefaultLanguage = "en",
+                LanguageOptions = new LanguageOptionsModel()
+                {
+                    AutoDectect = true,
+                    DefaultLanguage = "en",
+                    DetectionMethod = LanguageDetectionMethod.Browser
+                } ,
                 GuiOptions = new GuiOptionsModel
                 {
-                    ModalLayout = "box",
-                    ModalPosition = "bottom left",
-                    PreferencesLayout = "box",
-                    PreferencesPosition = "right"
+                    ConsentModalLayout = ConsentModalLayout.Box,
+                    ConsentModalPosition = ConsentModalPosition.BottomLeft,
+                    PreferencesModalLayout = PreferencesModalLayout.Box,
+                    PreferencesModalPosition = PreferencesModalPosition.Right
                 },
                 Theme = "light",
                 MiscOptions = new MiscOptionsModel
