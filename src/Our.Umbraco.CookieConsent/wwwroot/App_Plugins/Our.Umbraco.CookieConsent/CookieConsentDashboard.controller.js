@@ -5,6 +5,37 @@
         var vm = this;
 
         vm.loading = true;
+        vm.enums = {
+            consentModalLayouts: [
+                { value: 'Box', displayName: 'box' },
+                { value: 'BoxInline', displayName: 'box inline' },
+                { value: 'BoxWide', displayName: 'box wide' },
+                { value: 'Cloud', displayName: 'cloud' },
+                { value: 'CloudInline', displayName: 'cloud inline' },
+                { value: 'Bar', displayName: 'bar' },
+                { value: 'BarInline', displayName: 'bar inline' }
+            ],
+            preferencesModalLayouts: [
+                { value: 'Box', displayName: 'box' },
+                { value: 'Bar', displayName: 'bar' },
+                { value: 'BarWide', displayName: 'bar wide' }
+            ],
+            consentModalPositions: [
+                { value: 'TopLeft', displayName: 'top left' },
+                { value: 'TopCenter', displayName: 'top center' },
+                { value: 'TopRight', displayName: 'top right' },
+                { value: 'MiddleLeft', displayName: 'middle left' },
+                { value: 'MiddleCenter', displayName: 'middle center' },
+                { value: 'MiddleRight', displayName: 'middle right' },
+                { value: 'BottomLeft', displayName: 'bottom left' },
+                { value: 'BottomCenter', displayName: 'bottom center' },
+                { value: 'BottomRight', displayName: 'bottom right' }
+            ],
+            preferencesModalPositions: [
+                { value: 'Left', displayName: 'left' },
+                { value: 'Right', displayName: 'right' }
+            ]
+        };
         vm.settings = {
             categories: {
                 necessary: true,

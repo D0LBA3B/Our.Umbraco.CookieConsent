@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NPoco;
 using Our.Umbraco.CookieConsent.Interfaces;
@@ -93,7 +93,7 @@ namespace Our.Umbraco.CookieConsent.Services
         {
             return new CookieConsentSettingsModel
             {
-                ApplicableCategories = new CookieCategoriesModel
+                ApplicableCategories = new CookieCategoriesModel()
                 {
                     Necessary = true,
                     Functionality = false,

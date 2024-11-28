@@ -1,3 +1,4 @@
+@using Our.Umbraco.CookieConsent.Extensions
 @using Our.Umbraco.CookieConsent.Interfaces
 @using Our.Umbraco.CookieConsent.Models
 @inject ICookieConsentService CookieConsentService
@@ -7,56 +8,82 @@
 }
 @if (cookieSettings is not null)
 {
-    <link rel="stylesheet" href="/libraries/cookieconsent-orestbida/cookieconsent.min.css"/>
-    <script src="/libraries/cookieconsent-orestbida/cookieconsent.umd.min.js" defer></script>
+    <link rel="stylesheet" href="/libraries/cookieconsent-orestbida/cookieconsent.min.css" />
+    <script src="/libraries/cookieconsent-orestbida/cookieconsent.umd.min.js"></script>
     <script>
-    window.addEventListener('load', () => {
-        CookieConsent.run({
-            current_lang: '@cookieSettings.',
-            autoclear_cookies: true,
-            cookie_name: 'cookieconsent',
-            cookie_expiration: 31,
-            auto_language: '@cookieSettings?.LanguageOptions?.DefaultLanguage',
-            guiOptions: {
-                consentModal: {
-                    layout: "@cookieSettings?.GuiOptions.ConsentModalLayout",
-                    position: "@cookieSettings?.GuiOptions.ConsentModalPosition",
-                    equalWeightButtons: true,
-                    flipButtons: false,
-                    transition: 'slide'
+        window.addEventListener('load', () => {
+            CookieConsent.run({
+                current_lang: 'en',
+                autoclear_cookies: true,
+                cookie_name: 'cookieconsent',
+                cookie_expiration: 31,
+                guiOptions: {
+                    consentModal: {
+                        layout: "@cookieSettings?.GuiOptions.ConsentModalLayout.GetDisplayName()",
+                        position: "@cookieSettings?.GuiOptions.ConsentModalPosition.GetDisplayName()",
+                        equalWeightButtons: true,
+                        flipButtons: false,
+                        transition: 'slide'
+                    },
+                    preferencesModal: {
+                        layout: "@cookieSettings?.GuiOptions.PreferencesModalLayout.GetDisplayName()",
+                        position: "@cookieSettings?.GuiOptions.PreferencesModalPosition.GetDisplayName()",
+                        equalWeightButtons: true,
+                        flipButtons: false,
+                        sections: [
+                            {
+                                title: "Performance and analysis cookies",
+                                description: "These cookies allow the website to remember the choices you have made in the past.",
+                                linkedCategory: "analytics"
+                            },
+                            {
+                                title: "Strictly necessary cookies",
+                                description: "These cookies are essential for the proper functioning of my website. Without these cookies, the site would not function properly.",
+                                linkedCategory: "necessary"
+                            },
+                            {
+                                title: "More information",
+                                description: "If you have any questions about our cookie policy and your choices, please contact us.",
+                                linkedCategory: "unclassified"
+                            },
+                        ]
+                    }
                 },
-                preferencesModal: {
-                    layout: "@cookieSettings?.GuiOptions.PreferencesModalLayout",
-                    position: "@cookieSettings?.GuiOptions.PreferencesModalPosition",
-                    equalWeightButtons: true,
-                    flipButtons: false
-                }
-            },
-            language: {
-                default: "@cookieSettings?.LanguageOptions?.DefaultLanguage",
-                translations: {
-                    "en": {
-                        consentModal: {
-                            title: "TODO",
-                            description: "TODO",
-                            acceptAllBtn: "TODO",
-                            acceptNecessaryBtn: "TODO",
-                            showPreferencesBtn: "TODO",
-                            footer: "TODO"
-                        },
-                        preferencesModal: {
-                            title: "TOOD",
-                            acceptAllBtn: "TODO",
-                            acceptNecessaryBtn: "TODO",
-                            savePreferencesBtn: "TODO",
-                            closeIconLabel: "TODO",
-                            serviceCounterLabel: "Service|Services",
-                            sections: []
+                categories: {
+                    necessary: {
+                        readOnly: true
+                    },
+                    functionality: {
+                        enabled: true,
+                    },
+                    analytics: {
+                        enabled: true,
+                    },
+                },
+                language: {
+                    default: "en",
+                    translations: {
+                        "en": {
+                            consentModal: {
+                                title: "TODO",
+                                description: "TODO",
+                                acceptAllBtn: "TODO",
+                                acceptNecessaryBtn: "TODO",
+                                showPreferencesBtn: "TODO",
+                                footer: "TODO"
+                            },
+                            preferencesModal: {
+                                title: "TOOD",
+                                acceptAllBtn: "TODO",
+                                acceptNecessaryBtn: "TODO",
+                                savePreferencesBtn: "TODO",
+                                closeIconLabel: "TODO",
+                                serviceCounterLabel: "Service|Services",
+                            }
                         }
                     }
                 }
-            }
+            });
         });
-    });
-</script>
+    </script>
 }
