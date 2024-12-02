@@ -15,11 +15,11 @@ public enum LanguageDetectionMethod
 
 public readonly struct Translations
 {
-    public const string NAMESPACE = "Our.Umbraco.CookieConsent.";
+    public const string NAMESPACE = "Our.Umbraco.CookieConsent";
 
     public readonly struct ConsentModal
     {
-        private const string PREFIX = NAMESPACE + "ConsentModal.";
+        private const string PREFIX = NAMESPACE + ".ConsentModal.";
         public const string Title = PREFIX + "Title";
         public const string Description = PREFIX + "Description";
         public const string CloseIconLabel = PREFIX + "CloseIconLabel";
@@ -31,7 +31,7 @@ public readonly struct Translations
 
     public readonly struct PreferencesModal
     {
-        private const string PREFIX = NAMESPACE + "PreferencesModal.";
+        private const string PREFIX = NAMESPACE + ".PreferencesModal.";
         public const string Title = PREFIX + "Title";
         public const string CloseIconLabel = PREFIX + "CloseIconLabel";
         public const string AcceptAll = PREFIX + "AcceptAll";
