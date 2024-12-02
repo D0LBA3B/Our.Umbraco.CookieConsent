@@ -10,22 +10,25 @@
     var categories = new List<dynamic>();
     foreach (var property in typeof(CookieCategoriesModel).GetProperties())
     {
-        var categoryName = property.Name;
-        var isApplicable = (bool)property.GetValue(cookieSettings.ApplicableCategories);
-
-        if (isApplicable)
+        var value = ((bool Enabled, bool ReadOnly))property.GetValue(cookieSettings.ApplicableCategories);
+        if (value.Enabled)
         {
-            var lowerCategoryName = categoryName.ToLower();
-            var sectionTitle = UmbracoHelper.GetDictionaryValue(string.Format(Translations.PreferencesModal.Sections.Title, categoryName));
-            var sectionDescr = UmbracoHelper.GetDictionaryValue(string.Format(Translations.PreferencesModal.Sections.Description, categoryName));
+            var categoryName = property.Name;
+
+            var sectionTitle = UmbracoHelper.GetDictionaryValue(
+                string.Format(Translations.PreferencesModal.Sections.Title, categoryName)
+            );
+            var sectionDescr = UmbracoHelper.GetDictionaryValue(
+                string.Format(Translations.PreferencesModal.Sections.Description, categoryName)
+            );
 
             categories.Add(new
             {
                 Name = categoryName,
-                LowerName = lowerCategoryName,
+                LowerName = categoryName.ToLower(),
                 Title = sectionTitle,
                 Description = sectionDescr,
-                IsReadOnly = false //TODO
+                IsReadOnly = value.ReadOnly.ToString().ToLower()
             });
         }
     }
@@ -59,19 +62,10 @@
                 categories: {
                     @foreach (var category in categories)
                     {
-                        if (category.IsReadOnly)
-                        {
-                            <text>@category.LowerName: {
-                                readOnly: true,
-                                enabled: true
-                            },</text>
-                        }
-                        else
-                        {
-                            <text>@category.LowerName: {
-                                enabled: true
-                            },</text>
-                        }
+                        <text>@category.LowerName: {
+                            readOnly: @category.IsReadOnly,
+                            enabled: true
+                        },</text>
                     }
                 },
                 language: {

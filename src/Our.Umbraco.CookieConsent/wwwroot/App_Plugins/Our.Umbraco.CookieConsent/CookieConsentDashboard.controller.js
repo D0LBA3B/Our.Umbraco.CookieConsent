@@ -41,38 +41,10 @@
             $http.get('backoffice/api/CookieConsent/GetSettings')
                 .then(function (response) {
                     vm.settings = response.data;
-                    console.log(vm.settings.availableLanguages);
                     vm.loading = false;
                 })
                 .catch(function () {
                     notificationsService.error("Error", "Failed to load settings.");
-                    vm.settings = {
-                        categories: {
-                            necessary: true,
-                            functionality: false,
-                            analytics: false,
-                            marketing: false
-                        },
-                        languageOptions: {
-                            defaultLanguage: 'en',
-                            autoDectect: true,
-                            detectionMethod: 'Broswer',
-                        },
-                        gui: {
-                            modalLayout: 'box',
-                            modalPosition: 'bottom left',
-                            flipButtons: false,
-                            preferencesLayout: 'box',
-                            preferencesPosition: 'right',
-                            flipButtonsPreferences: false
-                        },
-                        misc: {
-                            enableDarkMode: false,
-                            disableTransitions: false,
-                            disablePageInteraction: false
-                        },
-                        theme: 'light'
-                    };
                     vm.loading = false;
                 });
         };
@@ -102,6 +74,18 @@
                     notificationsService.error("Error", "Failed to reset settings.");
                     vm.loading = false;
                 });
+        };
+
+        vm.toggleCategory = function (categoryName, property) {
+            if (property === 'item1') {
+                if (vm.settings.applicableCategories[categoryName].item2) {
+                    return;
+                }
+            } else if (property === 'item2') {
+                vm.settings.applicableCategories[categoryName].item1 = true;
+            }
+            vm.settings.applicableCategories[categoryName][property] =
+                !vm.settings.applicableCategories[categoryName][property];
         };
 
         vm.loadSettings();

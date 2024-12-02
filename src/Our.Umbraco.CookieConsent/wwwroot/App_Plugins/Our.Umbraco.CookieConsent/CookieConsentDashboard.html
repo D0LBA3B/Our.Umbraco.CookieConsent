@@ -10,22 +10,21 @@
         </div>
         <div class="cookieconsent-panel-checks">
             <div class="cookieconsent-checkbox-list">
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.applicableCategories.necessary" />
-                    Necessary
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.applicableCategories.functionality" />
-                    Functionality
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.applicableCategories.analytics" />
-                    Analytics
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.applicableCategories.marketing" />
-                    Marketing
-                </label>
+                <div ng-repeat="(key, category) in vm.settings.applicableCategories">
+                    <label>
+                        <input type="checkbox"
+                               ng-checked="category.item1"
+                               ng-click="vm.toggleCategory(key, 'item1')"
+                               ng-disabled="category.item2" />
+                        {{ key }} Enabled
+                    </label>
+                    <label>
+                        <input type="checkbox"
+                               ng-checked="category.item2"
+                               ng-click="vm.toggleCategory(key, 'item2')" />
+                        {{ key }} ReadOnly
+                    </label>
+                </div>
             </div>
         </div>
     </div>

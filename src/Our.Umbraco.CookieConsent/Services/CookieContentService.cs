@@ -139,10 +139,10 @@ namespace Our.Umbraco.CookieConsent.Services
             {
                 ApplicableCategories = new CookieCategoriesModel()
                 {
-                    Necessary = true,
-                    Functionality = false,
-                    Analytics = false,
-                    Marketing = false
+                    Necessary = (true, true),
+                    Functionality = (true, true),
+                    Analytics = (false, false),
+                    Marketing = (true, false)
                 },
                 AvailableLanguages = _localizationService.GetAllLanguages().Select(x => (Value: x.CultureInfo.TwoLetterISOLanguageName, DisplayName: x.CultureName)).ToList(),
                 LanguageOptions = new LanguageOptionsModel()
