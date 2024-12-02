@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Our.Umbraco.CookieConsent.Interfaces;
 using Our.Umbraco.CookieConsent.Models;
-using Our.Umbraco.CookieConsent.Services;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Umbraco.Cms.Web.BackOffice.Filters;
 using Umbraco.Cms.Web.Common.Attributes;
@@ -34,7 +33,7 @@ public class CookieConsentController : UmbracoAuthorizedJsonController
     [HttpGet]
     public CookieConsentSettingsModel ResetSettings()
     {
-        //TODO _cookieConsentService.ResetSettings();
+        _cookieConsentService.ResetSettings();
         return _cookieConsentService.GetSettings();
     }
 }

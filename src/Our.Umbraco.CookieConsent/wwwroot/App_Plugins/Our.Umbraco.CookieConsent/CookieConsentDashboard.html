@@ -65,12 +65,7 @@
             <label>
                 Default Language:
                 <select ng-model="vm.settings.languageOptions.defaultLanguage">
-                    <option value="ar">Arabic</option>
-                    <option value="de">German</option>
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
-                    <option value="it">Italian</option>
+                    <option ng-repeat="translation in vm.enums.translations" ng-value="translation.value">{{translation.displayName}}</option>
                 </select>
             </label>
         </div>

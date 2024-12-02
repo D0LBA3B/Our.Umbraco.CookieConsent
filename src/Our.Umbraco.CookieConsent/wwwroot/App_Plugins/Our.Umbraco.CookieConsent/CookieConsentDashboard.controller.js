@@ -20,6 +20,14 @@
                 { value: 'Bar', displayName: 'bar' },
                 { value: 'BarWide', displayName: 'bar wide' }
             ],
+            translations: [
+                { value: 'ar', active: false, displayName: 'Arabic' },
+                { value: 'de', active: false, displayName: 'German' },
+                { value: 'en', active: false, displayName: 'English' },
+                { value: 'es', active: false, displayName: 'Spanish' },
+                { value: 'fr', active: false, displayName: 'French' },
+                { value: 'it', active: false, displayName: 'Italian' }
+            ],
             consentModalPositions: [
                 { value: 'TopLeft', displayName: 'top left' },
                 { value: 'TopCenter', displayName: 'top center' },
@@ -43,15 +51,11 @@
                 analytics: false,
                 marketing: false
             },
-            translations: {
-                ar: false,
-                de: false,
-                en: true,
-                es: false,
-                fr: false,
-                it: false
+            languageOptions: {
+                defaultLanguage: 'en',
+                autoDectect: true,
+                detectionMethod: 'Broswer',
             },
-            defaultLanguage: 'en',
             gui: {
                 modalLayout: 'box',
                 modalPosition: 'bottom left',

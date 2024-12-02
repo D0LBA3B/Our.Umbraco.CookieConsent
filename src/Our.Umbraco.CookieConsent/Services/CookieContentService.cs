@@ -89,6 +89,29 @@ namespace Our.Umbraco.CookieConsent.Services
             }
         }
 
+        public void ResetSettings()
+        {
+            var settings = GetDefaultSettings();
+            try
+            {
+                using (var scope = _scopeProvider.CreateScope())
+                {
+                    var settingsJson = JsonConvert.SerializeObject(settings);
+                    scope.Database.Execute(InsertSettingsSql, new
+                    {
+                        settingsJson,
+                        lastUpdated = DateTime.UtcNow
+                    });
+                    scope.Complete();
+                }
+                _logger.LogInformation("Cookie consent settings reset successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error while resetting cookie consent settings.");
+            }
+        }
+
         private CookieConsentSettingsModel GetDefaultSettings()
         {
             return new CookieConsentSettingsModel
@@ -111,7 +134,7 @@ namespace Our.Umbraco.CookieConsent.Services
                     AutoDectect = true,
                     DefaultLanguage = "en",
                     DetectionMethod = LanguageDetectionMethod.Browser
-                } ,
+                },
                 GuiOptions = new GuiOptionsModel
                 {
                     ConsentModalLayout = ConsentModalLayout.Box,
