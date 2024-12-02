@@ -15,9 +15,9 @@
     <script>
         window.addEventListener('load', () => {
             CookieConsent.run({
-                current_lang: 'en',
+                current_lang: '@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName',
                 autoclear_cookies: true,
-                cookie_name: 'cookieconsent',
+                cookie_name: 'umbraco_cookieconsent',
                 cookie_expiration: 31,
                 guiOptions: {
                     consentModal: {

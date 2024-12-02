@@ -36,38 +36,14 @@
             <div class="cookieconsent-panel-name">Translations</div>
         </div>
         <div class="cookieconsent-panel-checks">
-            <div class="cookieconsent-checkbox-list">
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.ar" />
-                    Arabic
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.de" />
-                    German
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.en" />
-                    English
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.es" />
-                    Spanish
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.fr" />
-                    French
-                </label>
-                <label>
-                    <input type="checkbox" ng-model="vm.settings.translations.it" />
-                    Italian
-                </label>
-            </div>
             <label>
                 Default Language:
                 <select ng-model="vm.settings.languageOptions.defaultLanguage">
-                    <option ng-repeat="translation in vm.enums.translations" ng-value="translation.value">{{translation.displayName}}</option>
+                    <option ng-repeat="translation in vm.settings.availableLanguages" ng-value="translation.item1">{{translation.item2}}</option>
                 </select>
             </label>
+            <p>Translations such as the pop-up title, etc. can be modified via <a class="btn-link -underline" href="/umbraco#/translation/dictionary/list">the Dictionary tab</a> under the "Our.Umbraco.CookieConsent" key.</p>
+            <i>The languages available depend on the languages configured in Umbraco.</i>
         </div>
     </div>
 

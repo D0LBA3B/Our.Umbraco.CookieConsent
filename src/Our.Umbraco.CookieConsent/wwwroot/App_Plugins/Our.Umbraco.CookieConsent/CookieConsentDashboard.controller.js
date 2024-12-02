@@ -20,14 +20,6 @@
                 { value: 'Bar', displayName: 'bar' },
                 { value: 'BarWide', displayName: 'bar wide' }
             ],
-            translations: [
-                { value: 'ar', active: false, displayName: 'Arabic' },
-                { value: 'de', active: false, displayName: 'German' },
-                { value: 'en', active: false, displayName: 'English' },
-                { value: 'es', active: false, displayName: 'Spanish' },
-                { value: 'fr', active: false, displayName: 'French' },
-                { value: 'it', active: false, displayName: 'Italian' }
-            ],
             consentModalPositions: [
                 { value: 'TopLeft', displayName: 'top left' },
                 { value: 'TopCenter', displayName: 'top center' },
@@ -44,42 +36,43 @@
                 { value: 'Right', displayName: 'right' }
             ]
         };
-        vm.settings = {
-            categories: {
-                necessary: true,
-                functionality: false,
-                analytics: false,
-                marketing: false
-            },
-            languageOptions: {
-                defaultLanguage: 'en',
-                autoDectect: true,
-                detectionMethod: 'Broswer',
-            },
-            gui: {
-                modalLayout: 'box',
-                modalPosition: 'bottom left',
-                flipButtons: false,
-                preferencesLayout: 'box',
-                preferencesPosition: 'right',
-                flipButtonsPreferences: false
-            },
-            misc: {
-                enableDarkMode: false,
-                disableTransitions: false,
-                disablePageInteraction: false
-            },
-            theme: 'light'
-        };
 
         vm.loadSettings = function () {
             $http.get('backoffice/api/CookieConsent/GetSettings')
                 .then(function (response) {
                     vm.settings = response.data;
+                    console.log(vm.settings.availableLanguages);
                     vm.loading = false;
                 })
                 .catch(function () {
                     notificationsService.error("Error", "Failed to load settings.");
+                    vm.settings = {
+                        categories: {
+                            necessary: true,
+                            functionality: false,
+                            analytics: false,
+                            marketing: false
+                        },
+                        languageOptions: {
+                            defaultLanguage: 'en',
+                            autoDectect: true,
+                            detectionMethod: 'Broswer',
+                        },
+                        gui: {
+                            modalLayout: 'box',
+                            modalPosition: 'bottom left',
+                            flipButtons: false,
+                            preferencesLayout: 'box',
+                            preferencesPosition: 'right',
+                            flipButtonsPreferences: false
+                        },
+                        misc: {
+                            enableDarkMode: false,
+                            disableTransitions: false,
+                            disablePageInteraction: false
+                        },
+                        theme: 'light'
+                    };
                     vm.loading = false;
                 });
         };

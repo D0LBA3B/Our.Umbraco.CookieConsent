@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using NPoco;
 using Our.Umbraco.CookieConsent.Interfaces;
 using Our.Umbraco.CookieConsent.Models;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Scoping;
 
 namespace Our.Umbraco.CookieConsent.Services
@@ -11,6 +12,7 @@ namespace Our.Umbraco.CookieConsent.Services
     {
         private readonly IScopeProvider _scopeProvider;
         private readonly ILogger<CookieConsentService> _logger;
+        private readonly ILocalizationService _localizationService;
 
         private const string DefaultSettingsSql = @"SELECT TOP(1) 
                                 [Id],
@@ -31,10 +33,11 @@ namespace Our.Umbraco.CookieConsent.Services
                                 ([SettingsJson], [LastUpdated])
                              VALUES (@settingsJson, @lastUpdated)";
 
-        public CookieConsentService(IScopeProvider scopeProvider, ILogger<CookieConsentService> logger)
+        public CookieConsentService(IScopeProvider scopeProvider, ILogger<CookieConsentService> logger, ILocalizationService localizationService)
         {
             _scopeProvider = scopeProvider;
             _logger = logger;
+            _localizationService = localizationService;
         }
 
         public CookieConsentSettingsModel GetSettings()
@@ -47,9 +50,10 @@ namespace Our.Umbraco.CookieConsent.Services
                         ? DefaultSettingsSqlLite
                         : DefaultSettingsSql;
 
-                    var settings = scope.Database.FirstOrDefault<CookieConsentSettingsSqlModel>(sql);
-
-                    return CookieConsentMapper.MapToCookieModel(settings) ?? GetDefaultSettings();
+                    var sqlSettings = scope.Database.FirstOrDefault<CookieConsentSettingsSqlModel>(sql);
+                    var settings = CookieConsentMapper.MapToCookieModel(sqlSettings);
+                    settings.AvailableLanguages = _localizationService.GetAllLanguages().Select(x => (Value: x.CultureInfo.TwoLetterISOLanguageName, DisplayName: x.CultureName)).ToList();
+                    return settings;
                 }
             }
             catch (Exception ex)
@@ -123,12 +127,7 @@ namespace Our.Umbraco.CookieConsent.Services
                     Analytics = false,
                     Marketing = false
                 },
-                Translations = new Dictionary<string, bool>
-                {
-                    { "en", true },
-                    { "fr", false },
-                    { "de", false }
-                },
+                AvailableLanguages = _localizationService.GetAllLanguages().Select(x => (Value: x.CultureInfo.TwoLetterISOLanguageName, DisplayName: x.CultureName)).ToList(),
                 LanguageOptions = new LanguageOptionsModel()
                 {
                     AutoDectect = true,
