@@ -473,5 +473,5 @@ umbraco-package-schema.json
 /Our.Umbraco.CookieConsent.Test/umbraco/Data/*.sqlite.db-shm
 /Our.Umbraco.CookieConsent.Test/umbraco/Data/*.sqlite.db-wal
 
-#Test files
 /Our.Umbraco.CookieConsent.Test/App_Plugins/
+/Our.Umbraco.CookieConsent.Test/Views/
