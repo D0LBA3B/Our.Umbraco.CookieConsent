@@ -7,6 +7,28 @@
 @{
     CookieConsentSettingsModel cookieSettings = CookieConsentService.GetSettings();
 
+    var categories = new List<dynamic>();
+    foreach (var property in typeof(CookieCategoriesModel).GetProperties())
+    {
+        var categoryName = property.Name;
+        var isApplicable = (bool)property.GetValue(cookieSettings.ApplicableCategories);
+
+        if (isApplicable)
+        {
+            var lowerCategoryName = categoryName.ToLower();
+            var sectionTitle = UmbracoHelper.GetDictionaryValue(string.Format(Translations.PreferencesModal.Sections.Title, categoryName));
+            var sectionDescr = UmbracoHelper.GetDictionaryValue(string.Format(Translations.PreferencesModal.Sections.Description, categoryName));
+
+            categories.Add(new
+            {
+                Name = categoryName,
+                LowerName = lowerCategoryName,
+                Title = sectionTitle,
+                Description = sectionDescr,
+                IsReadOnly = false //TODO
+            });
+        }
+    }
 }
 @if (cookieSettings is not null)
 {
@@ -32,40 +54,30 @@
                         position: "@cookieSettings?.GuiOptions.PreferencesModalPosition.GetDisplayName()",
                         equalWeightButtons: true,
                         flipButtons: false,
-                        sections: [
-                            {
-                                title: "Performance and analysis cookies",
-                                description: "These cookies allow the website to remember the choices you have made in the past.",
-                                linkedCategory: "analytics"
-                            },
-                            {
-                                title: "Strictly necessary cookies",
-                                description: "These cookies are essential for the proper functioning of my website. Without these cookies, the site would not function properly.",
-                                linkedCategory: "necessary"
-                            },
-                            {
-                                title: "More information",
-                                description: "If you have any questions about our cookie policy and your choices, please contact us.",
-                                linkedCategory: "unclassified"
-                            },
-                        ]
                     }
                 },
                 categories: {
-                    necessary: {
-                        readOnly: true
-                    },
-                    functionality: {
-                        enabled: true,
-                    },
-                    analytics: {
-                        enabled: true,
-                    },
+                    @foreach (var category in categories)
+                    {
+                        if (category.IsReadOnly)
+                        {
+                            <text>@category.LowerName: {
+                                readOnly: true,
+                                enabled: true
+                            },</text>
+                        }
+                        else
+                        {
+                            <text>@category.LowerName: {
+                                enabled: true
+                            },</text>
+                        }
+                    }
                 },
                 language: {
-                    default: "en",
+                    default: "@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName",
                     translations: {
-                        "en": {
+                        "@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName": {
                             consentModal: {
                                 title: "@UmbracoHelper.GetDictionaryValue(Translations.ConsentModal.Title)",
                                 description: "@UmbracoHelper.GetDictionaryValue(Translations.ConsentModal.Description)",
@@ -81,6 +93,16 @@
                                 savePreferencesBtn: "@UmbracoHelper.GetDictionaryValue(Translations.PreferencesModal.Save)",
                                 closeIconLabel: "@UmbracoHelper.GetDictionaryValue(Translations.PreferencesModal.CloseIconLabel)",
                                 serviceCounterLabel: "@UmbracoHelper.GetDictionaryValue(Translations.PreferencesModal.ServiceCounterLabel)",
+                                sections: [
+                                    @foreach (var category in categories)
+                                    {
+                                        <text>{
+                                            title: "@category.Title",
+                                            description: "@category.Description",
+                                            linkedCategory: "@category.LowerName"
+                                        },</text>
+                                    }
+                                ]
                             }
                         }
                     }

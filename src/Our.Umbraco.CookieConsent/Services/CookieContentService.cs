@@ -13,6 +13,7 @@ namespace Our.Umbraco.CookieConsent.Services
         private readonly IScopeProvider _scopeProvider;
         private readonly ILogger<CookieConsentService> _logger;
         private readonly ILocalizationService _localizationService;
+        private readonly DictionaryKeySeeder _dictionaryKeySeeder;
 
         private const string DefaultSettingsSql = @"SELECT TOP(1) 
                                 [Id],
@@ -33,11 +34,15 @@ namespace Our.Umbraco.CookieConsent.Services
                                 ([SettingsJson], [LastUpdated])
                              VALUES (@settingsJson, @lastUpdated)";
 
-        public CookieConsentService(IScopeProvider scopeProvider, ILogger<CookieConsentService> logger, ILocalizationService localizationService)
+        public CookieConsentService(IScopeProvider scopeProvider,
+            ILogger<CookieConsentService> logger,
+            ILocalizationService localizationService,
+            DictionaryKeySeeder dictionaryKeySeeder)
         {
             _scopeProvider = scopeProvider;
             _logger = logger;
             _localizationService = localizationService;
+            _dictionaryKeySeeder = dictionaryKeySeeder;
         }
 
         public CookieConsentSettingsModel GetSettings()
@@ -69,6 +74,18 @@ namespace Our.Umbraco.CookieConsent.Services
             {
                 _logger.LogWarning("Attempted to save empty or null settings.");
                 throw new ArgumentException("Settings cannot be null.", nameof(settings));
+            }
+
+            if (settings?.ApplicableCategories != null)
+            {
+                foreach (var property in typeof(CookieCategoriesModel).GetProperties())
+                {
+                    if (property.PropertyType == typeof(bool) && (bool)property.GetValue(settings.ApplicableCategories))
+                    {
+                        _dictionaryKeySeeder.CreateSection(property.Name);
+                    }
+                    // delete unused categories?
+                }
             }
 
             try

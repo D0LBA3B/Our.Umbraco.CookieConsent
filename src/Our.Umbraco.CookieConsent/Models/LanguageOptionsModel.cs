@@ -42,11 +42,8 @@ public readonly struct Translations
         public readonly struct Sections
         {
             private const string SECTIONS_PREFIX = PREFIX + "Sections.";
-            public const string Title = SECTIONS_PREFIX + "Title";
-            public const string Description = SECTIONS_PREFIX + "Description";
-            public const string LinkedCategory = SECTIONS_PREFIX + "LinkedCategory";
-            public const string Delete = SECTIONS_PREFIX + "Delete";
-            public const string Add = SECTIONS_PREFIX + "Add";
+            public const string Title = SECTIONS_PREFIX + "{0}.Title";
+            public const string Description = SECTIONS_PREFIX + "{0}.Description";
         }
     }
 }

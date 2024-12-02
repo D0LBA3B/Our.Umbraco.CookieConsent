@@ -33,12 +33,18 @@ public class DictionaryKeySeeder
         CreateKey(Translations.PreferencesModal.RejectAll, "Reject All Button", parentKey);
         CreateKey(Translations.PreferencesModal.Save, "Save Preferences Button", parentKey);
         CreateKey(Translations.PreferencesModal.ServiceCounterLabel, "Service Counter Label", parentKey);
+    }
 
-        CreateKey(Translations.PreferencesModal.Sections.Title, "Section Title", parentKey);
-        CreateKey(Translations.PreferencesModal.Sections.Description, "Section Description", parentKey);
-        CreateKey(Translations.PreferencesModal.Sections.LinkedCategory, "Linked Category Dropdown", parentKey);
-        CreateKey(Translations.PreferencesModal.Sections.Delete, "Delete Section Button", parentKey);
-        CreateKey(Translations.PreferencesModal.Sections.Add, "Add Section Button", parentKey);
+    // sectionName = analytics / marketing / functional ...
+    public void CreateSection(string sectionName)
+    {
+        var parentKey = _localizationService.GetDictionaryItemByKey(Translations.NAMESPACE)?.Key;
+        if (parentKey is null)
+            parentKey = CreateKey(Translations.NAMESPACE, "-");
+
+        parentKey = CreateKey(sectionName, "-", parentKey);
+        CreateKey(string.Format(Translations.PreferencesModal.Sections.Title, sectionName), sectionName + " - Title", parentKey);
+        CreateKey(string.Format(Translations.PreferencesModal.Sections.Description, sectionName), sectionName + " - Desription", parentKey);
     }
 
     private Guid? CreateKey(string key, string value, Guid? parentKey = null)
