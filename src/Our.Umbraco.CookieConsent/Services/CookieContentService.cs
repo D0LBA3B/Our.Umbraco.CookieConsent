@@ -80,9 +80,11 @@ namespace Our.Umbraco.CookieConsent.Services
             {
                 foreach (var property in typeof(CookieCategoriesModel).GetProperties())
                 {
-                    if (property.PropertyType == typeof(bool) && (bool)property.GetValue(settings.ApplicableCategories))
+                    if (property.PropertyType == typeof((bool Enabled, bool ReadOnly)))
                     {
-                        _dictionaryKeySeeder.CreateSection(property.Name);
+                        var tupleValue = ((bool Enabled, bool ReadOnly))property.GetValue(settings.ApplicableCategories);
+                        if (tupleValue.Enabled)
+                            _dictionaryKeySeeder.CreateSection(property.Name);
                     }
                     // delete unused categories?
                 }
