@@ -3,10 +3,6 @@
 
 A package for adding a fully configurable cookie consent banner to your Umbraco site, using the Orestbida/CookieConsent library.
 
-## Status
-
-🚧 This package is currently under development. The first release (v0.0.1) is planned for December 5th. 🚧
-
 ## Configuration
 
 1. **Access the Dashboard**  
