@@ -1,5 +1,4 @@
 # Our.Umbraco.CookieConsent
-<img src="https://raw.githubusercontent.com/D0LBA3B/Our.Umbraco.CookieConsent/master/OurUmbracoCookieConsent.png" alt="Our Umbraco Cookie Consent" width="150" align="right">
 
 A package for adding a fully configurable cookie consent banner to your Umbraco site, using the Orestbida/CookieConsent library.
 
