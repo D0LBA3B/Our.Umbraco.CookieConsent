@@ -1,6 +1,10 @@
 # Our.Umbraco.CookieConsent
 
-A package for adding a fully configurable cookie consent banner to your Umbraco site, using the Orestbida/CookieConsent library.
+[![Umbraco Marketplace](https://img.shields.io/badge/Umbraco-Marketplace-%233544B1?style=flat&logo=umbraco)](https://marketplace.umbraco.com/package/our.umbraco.cookieconsent)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Our.Umbraco.Cookieconsent?color=red&label=Downloads&logo=nuget)](https://www.nuget.org/packages/Our.Umbraco.CookieConsent)
+[![GitHub License](https://img.shields.io/github/license/D0LBA3B/Our.Umbraco.CookieConsent?color=green&label=License&logo=github)](https://github.com/D0LBA3B/Our.Umbraco.CookieConsent/blob/master/LICENSE)
+
+Easily add a configurable cookie consent banner to your Umbraco site. Features include a dashboard for customizing behavior, appearance, and translations, using the Orestbida/CookieConsent library.
 
 ## Configuration
 
