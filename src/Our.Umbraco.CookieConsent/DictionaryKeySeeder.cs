@@ -55,15 +55,15 @@ public class DictionaryKeySeeder
             if (existingItem == null)
             {
                 var dict = _localizationService.CreateDictionaryItemWithIdentity(key, parentId: parentKey, value);
-                Console.WriteLine($"Created translation key: {key}");
+                _logger.LogInformation($"Created translation key: {key}");
                 return dict?.Key;
             }
-            Console.WriteLine($"Key already exists: {key}");
+            _logger.LogInformation($"Key already exists: {key}");
             return existingItem?.Key;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error creating key {key}: {ex.Message}");
+            _logger.LogError($"Error creating key {key}: {ex.Message}");
             return null;
         }
     }

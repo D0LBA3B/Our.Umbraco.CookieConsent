@@ -100,8 +100,12 @@
                             }
                         }
                     }
-                }
+                },
+                disablePageInteraction: @((cookieSettings != null && cookieSettings.MiscOptions.DisablePageInteraction) ? "true" : "false")
             });
         });
+        @if(cookieSettings != null && cookieSettings.MiscOptions.EnableDarkMode) {
+            <text>document.documentElement.classList.add('cc--darkmode');</text>
+        }
     </script>
 }
