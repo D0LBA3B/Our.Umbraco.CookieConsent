@@ -19,20 +19,20 @@ public class DictionaryKeySeeder
     public void CreateBaseKeys()
     {
         var parentKey = CreateKey(Translations.NAMESPACE, "-");
-        CreateKey(Translations.ConsentModal.Title, "Consent Modal Title", parentKey);
-        CreateKey(Translations.ConsentModal.Description, "Consent Modal Description", parentKey);
-        CreateKey(Translations.ConsentModal.CloseIconLabel, "Close Icon Label", parentKey);
-        CreateKey(Translations.ConsentModal.AcceptAll, "Accept All Button", parentKey);
-        CreateKey(Translations.ConsentModal.RejectAll, "Reject All Button", parentKey);
-        CreateKey(Translations.ConsentModal.ManagePreferences, "Manage Preferences Button", parentKey);
-        CreateKey(Translations.ConsentModal.Footer, "Consent Modal Footer", parentKey);
+        CreateKey(Translations.ConsentModal.Title, "Your Privacy Settings", parentKey);
+        CreateKey(Translations.ConsentModal.Description, "We use cookies to improve your experience, analyze traffic, and personalize content. You can manage your preferences below or accept all cookies.", parentKey);
+        CreateKey(Translations.ConsentModal.CloseIconLabel, "Close this dialog", parentKey);
+        CreateKey(Translations.ConsentModal.AcceptAll, "Accept All Cookies", parentKey);
+        CreateKey(Translations.ConsentModal.RejectAll, "Reject All Cookies", parentKey);
+        CreateKey(Translations.ConsentModal.ManagePreferences, "Manage Cookie Preferences", parentKey);
+        CreateKey(Translations.ConsentModal.Footer, "Your choices will be saved for future visits. You can update them at any time.", parentKey);
 
-        CreateKey(Translations.PreferencesModal.Title, "Preferences Modal Title", parentKey);
-        CreateKey(Translations.PreferencesModal.CloseIconLabel, "Preferences Close Icon Label", parentKey);
-        CreateKey(Translations.PreferencesModal.AcceptAll, "Accept All Button", parentKey);
-        CreateKey(Translations.PreferencesModal.RejectAll, "Reject All Button", parentKey);
-        CreateKey(Translations.PreferencesModal.Save, "Save Preferences Button", parentKey);
-        CreateKey(Translations.PreferencesModal.ServiceCounterLabel, "Service Counter Label", parentKey);
+        CreateKey(Translations.PreferencesModal.Title, "Manage Your Cookie Preferences", parentKey);
+        CreateKey(Translations.PreferencesModal.CloseIconLabel, "Close preferences dialog", parentKey);
+        CreateKey(Translations.PreferencesModal.AcceptAll, "Accept All Cookies", parentKey);
+        CreateKey(Translations.PreferencesModal.RejectAll, "Reject All Cookies", parentKey);
+        CreateKey(Translations.PreferencesModal.Save, "Save My Preferences", parentKey);
+        CreateKey(Translations.PreferencesModal.ServiceCounterLabel, "Enabled Services: {count}", parentKey);
     }
 
     // sectionName = analytics / marketing / functional ...
@@ -43,8 +43,40 @@ public class DictionaryKeySeeder
             parentKey = CreateKey(Translations.NAMESPACE, "-");
 
         parentKey = CreateKey(sectionName, "-", parentKey);
-        CreateKey(string.Format(Translations.PreferencesModal.Sections.Title, sectionName), sectionName + " - Title", parentKey);
-        CreateKey(string.Format(Translations.PreferencesModal.Sections.Description, sectionName), sectionName + " - Desription", parentKey);
+
+        string title = string.Empty;
+        string description = string.Empty;
+
+        switch (sectionName.ToLower())
+        {
+            case "analytics":
+                title = "Analytics Preferences";
+                description = "These cookies help us understand how visitors interact with the website by collecting and reporting information anonymously.";
+                break;
+
+            case "marketing":
+                title = "Marketing Preferences";
+                description = "These cookies are used to deliver advertisements more relevant to you and your interests.";
+                break;
+
+            case "functionality":
+                title = "Functional Preferences";
+                description = "These cookies enable the website to provide enhanced functionality and personalization.";
+                break;
+
+            case "necessary":
+                title = "Essential Preferences";
+                description = "These cookies are necessary for the website to function and cannot be switched off in our systems.";
+                break;
+
+            default:
+                title = "Other Preferences";
+                description = "These cookies support additional functionalities or services.";
+                break;
+        }
+
+        CreateKey(string.Format(Translations.PreferencesModal.Sections.Title, sectionName), title, parentKey);
+        CreateKey(string.Format(Translations.PreferencesModal.Sections.Description, sectionName), description, parentKey);
     }
 
     private Guid? CreateKey(string key, string value, Guid? parentKey = null)
