@@ -18,7 +18,6 @@
         <EmbeddedResource Remove="umbraco\logs\**" />
         <EmbeddedResource Remove="umbraco\MediaCache\**" />
     </ItemGroup>
-  <Import Project="..\Our.Umbraco.CookieConsent\build\Our.Umbraco.CookieConsent.targets" />
   <ItemGroup>
         <None Remove="umbraco\Data\**" />
         <None Remove="umbraco\logs\**" />
