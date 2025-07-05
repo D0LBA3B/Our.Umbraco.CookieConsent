@@ -101,8 +101,35 @@
                         }
                     }
                 },
-                disablePageInteraction: @((cookieSettings != null && cookieSettings.MiscOptions.DisablePageInteraction) ? "true" : "false")
+                disablePageInteraction: @((cookieSettings != null && cookieSettings.MiscOptions.DisablePageInteraction) ? "true" : "false"),
+                onFirstConsent: () => {
+                    runScripts();
+                },
+                onConsent: () => {
+                    runScripts();
+                },
+                onChange: () => {
+                    runScripts();
+                }
             });
+
+            function runScripts() {
+                @if(cookieSettings.CustomScripts != null && cookieSettings.CustomScripts.Any())
+                {
+                    @foreach (var script in cookieSettings.CustomScripts)
+                    {
+                        var cat = script.Type.ToString().ToLowerInvariant();
+                        if (!string.IsNullOrWhiteSpace(script.Code))
+                        {
+                            <text>
+                            if (CookieConsent.acceptedCategory('@cat')) {
+                                @Html.Raw(script.Code)
+                            }
+                            </text>
+                        }
+                    }
+                }
+            }
         });
         @if(cookieSettings != null && cookieSettings.MiscOptions.EnableDarkMode) {
             <text>document.documentElement.classList.add('cc--darkmode');</text>

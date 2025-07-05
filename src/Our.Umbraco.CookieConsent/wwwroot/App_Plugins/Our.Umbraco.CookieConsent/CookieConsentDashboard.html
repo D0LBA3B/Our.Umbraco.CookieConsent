@@ -131,6 +131,37 @@
         </div>
     </div>
 
+    <!-- Scripts -->
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Scripts</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <p>You can configure your tracking scripts, such as Google Analytics, Facebook Pixel, or custom tags, based on the consent category.</p>
+            <div ng-repeat="script in vm.settings.customScripts track by $index" style="margin-bottom: 15px;">
+                <div class="umb-form-group">
+                    <label>
+                        Category:
+                        <select ng-model="script.type" ng-options="opt for opt in vm.scriptTypes" class="umb-property-editor umb-dropdown"></select>
+                    </label>
+                </div>
+                <div class="umb-form-group">
+                    <label for="custom-script-{{$index}}">Script:</label>
+                    <textarea id="custom-script-{{$index}}"
+                              rows="10"
+                              class="umb-property-editor umb-textarea"
+                              style="width: 100%;"
+                              ng-model="script.code">
+                    </textarea>
+                </div>
+                <div class="umb-form-group">
+                    <button class="btn btn-danger btn-xs" ng-click="vm.removeCustomScript($index)">Remove</button>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-sm" ng-click="vm.addCustomScript()">Add Script</button>
+        </div>
+    </div>
+
     <!-- Actions -->
     <div class="cookieconsent-actions">
         <button class="btn btn-danger" ng-click="vm.resetConfig()">Reset to Defaults</button>

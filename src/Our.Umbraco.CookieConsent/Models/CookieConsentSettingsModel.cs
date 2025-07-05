@@ -9,4 +9,5 @@ public class CookieConsentSettingsModel
     public GuiOptionsModel GuiOptions { get; set; }
     public MiscOptionsModel MiscOptions { get; set; }
     public string Theme { get; set; }
+    public List<ScriptOptionsModel> CustomScripts { get; set; }
 }

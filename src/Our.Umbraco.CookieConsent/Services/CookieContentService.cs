@@ -166,7 +166,8 @@ namespace Our.Umbraco.CookieConsent.Services
                     EnableDarkMode = false,
                     DisableTransitions = false,
                     DisablePageInteraction = false
-                }
+                },
+                CustomScripts = new ()
             };
         }
     }

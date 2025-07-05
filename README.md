@@ -27,6 +27,38 @@ Navigate to the Settings tab in the Umbraco Backoffice, and then select the Cook
    ```csharp
    @await Component.InvokeAsync("Cookie")
    ```
+
+## Scripts by category
+
+You can define custom scripts that are injected only **after user consent**, based on the selected cookie category (e.g. Analytics, Marketing, etc.).
+
+To do so:
+- Navigate to the **"Scripts"** section in the dashboard
+- Add a new entry with the target category (`Analytics`, `Marketing`, etc.)
+- Paste your script using **safe** JS, such as dynamic script injection
+
+**Important**: HTML `<script>` tags **cannot** be directly used inside JavaScript blocks. Instead, use JavaScript to create and inject scripts dynamically.
+
+### Example: Google Analytics script
+
+```js
+    var gtagScript = document.createElement('script');
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CN4GDXXXXX';
+    gtagScript.async = true;
+    document.head.appendChild(gtagScript);
+
+    gtagScript.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        window.gtag = gtag;
+
+        gtag('js', new Date());
+        gtag('config', 'G-XXXX');
+    };
+```
+
+This logic will only be executed if the user accepts the **analytics** category
+
 ## Credits
 This package is a simple integration of the [CookieConsent library](https://github.com/orestbida/cookieconsent), created by Orest Bida.
 

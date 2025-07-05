@@ -5,6 +5,7 @@
         var vm = this;
 
         vm.loading = true;
+        vm.scriptTypes = ["Necessary", "Functionality", "Analytics", "Marketing"];
         vm.enums = {
             consentModalLayouts: [
                 { value: 'Box', displayName: 'box' },
@@ -41,6 +42,7 @@
             $http.get('backoffice/api/CookieConsent/GetSettings')
                 .then(function (response) {
                     vm.settings = response.data;
+                    vm.settings.customScripts = vm.settings.customScripts || [];
                     vm.loading = false;
                 })
                 .catch(function () {
@@ -86,6 +88,18 @@
             }
             vm.settings.applicableCategories[categoryName][property] =
                 !vm.settings.applicableCategories[categoryName][property];
+        };
+
+        // TODO: Support built-in integrations for common services like Google Analytics, Facebook Pixel
+        vm.addCustomScript = function () {
+            vm.settings.customScripts.push({
+                type: "Analytics",
+                code: ""
+            });
+        };
+
+        vm.removeCustomScript = function (index) {
+            vm.settings.customScripts.splice(index, 1);
         };
 
         vm.loadSettings();
