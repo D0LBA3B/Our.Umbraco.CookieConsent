@@ -8,23 +8,25 @@ Easily add a configurable cookie consent banner to your Umbraco site. Features i
 
 ## Configuration
 
-1. **Access the Dashboard**  
+1. **Access the dashboard**  
 Navigate to the Settings tab in the Umbraco Backoffice, and then select the Cookie Consent dashboard to manage all settings related to your banner.
 
-2. **Customize Appearance and Behavior**  
+2. **Customize appearance and behavior**  
    Use the dashboard to configure:  
    - **Position** of the banner on your site.  
    - **Categories** of cookies to display.  
    - **Layout** and styles to match your site’s design.
    - ...
  
-3. **Manage Translations**  
+3. **Manage translations**  
    - Translations for the popup text can be managed in the **Translations** section of Umbraco, under the key `Our.Umbraco.CookieConsent`.  
    - The available languages for the cookie consent popup depend on the languages configured for your Umbraco site.
 
-4. **Save and Publish**  
-   Once you’ve customized the settings, save the configuration to activate the banner on your site.
-
+4. **Render the banner in your layout**
+   To display the cookie banner on your website, add the following line in your main layout file (`_Layout.cshtml` or equivalent):
+   ```csharp
+   @await Component.InvokeAsync("Cookie")
+   ```
 ## Credits
 This package is a simple integration of the [CookieConsent library](https://github.com/orestbida/cookieconsent), created by Orest Bida.
 
