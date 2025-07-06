@@ -167,7 +167,8 @@ namespace Our.Umbraco.CookieConsent.Services
                     DisableTransitions = false,
                     DisablePageInteraction = false
                 },
-                CustomScripts = new ()
+                CustomScripts = new (),
+                BuiltInScripts = new ()
             };
         }
     }

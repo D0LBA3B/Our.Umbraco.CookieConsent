@@ -43,6 +43,7 @@
                 .then(function (response) {
                     vm.settings = response.data;
                     vm.settings.customScripts = vm.settings.customScripts || [];
+                    vm.settings.builtInScripts = vm.settings.builtInScripts || [];
                     vm.loading = false;
                 })
                 .catch(function () {
@@ -100,6 +101,17 @@
 
         vm.removeCustomScript = function (index) {
             vm.settings.customScripts.splice(index, 1);
+        };
+
+        vm.addBuiltInScript = function () {
+            vm.settings.builtInScripts.push({
+                provider: "GoogleAnalytics",
+                id: "",
+            });
+        };
+
+        vm.removeBuiltInScript = function (index) {
+            vm.settings.builtInScripts.splice(index, 1);
         };
 
         vm.loadSettings();

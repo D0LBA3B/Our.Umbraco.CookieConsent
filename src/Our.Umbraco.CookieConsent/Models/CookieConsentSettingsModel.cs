@@ -10,4 +10,5 @@ public class CookieConsentSettingsModel
     public MiscOptionsModel MiscOptions { get; set; }
     public string Theme { get; set; }
     public List<ScriptOptionsModel> CustomScripts { get; set; }
+    public List<BuiltInScriptOptionsModel> BuiltInScripts { get; set; } = new();
 }

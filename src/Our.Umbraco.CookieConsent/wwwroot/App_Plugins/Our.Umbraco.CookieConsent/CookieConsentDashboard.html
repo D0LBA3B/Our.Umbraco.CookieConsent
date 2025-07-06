@@ -1,3 +1,4 @@
+<!--TODO: Improve the dashboard style, it's awful -->
 <div ng-controller="CookieConsentDashboard.Controller as vm">
     <div ng-show="vm.loading">
         <umb-load-indicator></umb-load-indicator>
@@ -131,10 +132,44 @@
         </div>
     </div>
 
+    <!-- Built-in Scripts -->
+    <div class="cookieconsent-panel-group">
+        <div class="cookieconsent-panel-title">
+            <div class="cookieconsent-panel-name">Built-in Scripts</div>
+        </div>
+        <div class="cookieconsent-panel-checks">
+            <p>Configure tracking providers like Google Analytics or Facebook Pixel by entering only the ID.</p>
+
+            <div ng-repeat="item in vm.settings.builtInScripts track by $index" style="margin-bottom: 15px;">
+                <div class="umb-form-group">
+                    <label>
+                        Provider:
+                        <select ng-model="item.provider" class="umb-property-editor umb-dropdown">
+                            <option value="GoogleAnalytics">Google Analytics</option>
+                            <option value="FacebookPixel">Facebook Pixel</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="umb-form-group">
+                    <label>
+                        Tracking ID:
+                        <input type="text" class="umb-property-editor umb-textstring" ng-model="item.id" placeholder="e.g. G-XXXXXXX or 1234567890" />
+                    </label>
+                </div>
+                <div class="umb-form-group">
+                    <button class="btn btn-danger btn-xs" ng-click="vm.removeBuiltInScript($index)">Remove</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary btn-sm" ng-click="vm.addBuiltInScript()">Add Built-in Script</button>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <div class="cookieconsent-panel-group">
         <div class="cookieconsent-panel-title">
-            <div class="cookieconsent-panel-name">Scripts</div>
+            <div class="cookieconsent-panel-name">Custom scripts</div>
         </div>
         <div class="cookieconsent-panel-checks">
             <p>You can configure your tracking scripts, such as Google Analytics, Facebook Pixel, or custom tags, based on the consent category.</p>
